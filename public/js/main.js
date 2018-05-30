@@ -33,51 +33,74 @@ $(document).ready(function(){
     hasLocal = storage.getObject('brands');
   }
 
-  let selects = [];
-  let header = `<select id="select-brand">`;
-  let options = [];
-  for(let i = 0;i < hasLocal.length; i++){
-    let brand = hasLocal[i];
-    options.push(`<option value="${brand.id}">${brand.name}</option>`);
-  }
-  let footer = `</select>`;
+  function loadBrands(){
+    let selects = [];
+    let header = `<select id="select-brand">`;
+    let options = [];
+    for(let i = 0;i < hasLocal.length; i++){
+      let brand = hasLocal[i];
+      options.push(`<option value="${brand.id}">${brand.name}</option>`);
+    }
+    let footer = `</select>`;
+  
+    $('#brand').html('').html(`
+      <label>Brands</label>
+      ${header}${options.join('')}${footer}
+    `);
+  
+    $('#model').html('').html('<label>Models</label><select id="select-model"></select>');
+    
+    $('#select-brand').off('change').on('change',function(){
+      let $this = $(this);
+      let brand_model = hasLocal.filter(function(elem){
+        return elem.id === parseInt($this.val());
+      });
+  
+      if(brand_model.length > 0){
+        brand_model = brand_model[0];
+        let mHeader = `<select id="select-model">`;
+        let mOptions = [];
+        for(let i = 0; i < brand_model.models.length; i++){
+          let model = brand_model.models[i];
+          mOptions.push(`<option value="${model.id}">${model.name}</option>`);
+        }
+        let mFooter = `</select>`;
+    
+        $('#model').html('').html(`
+          <label>Models</label>
+          ${mHeader}${mOptions.join('')}${mFooter}
+        `);
 
-  $('#brand').html('').html(`
-    <label>Brands</label>
-    ${header}${options.join('')}${footer}
-  `);
-
-  $('#model').html('<label>Models</label><select id="select-model"></select>');
-
-  $('#select-brand').on('change',function(){
-    let $this = $(this);
-    let brand_model = hasLocal.filter(function(elem){
-      return elem.id === parseInt($this.val());
+        $('#select-model').off('change').on('change',function(){
+          let $this = $(this);
+          let brand_model = hasLocal.filter(function(elem){
+            return elem.id === parseInt($('#select-brand').val());
+          });
+          console.log(brand_model);
+          if(brand_model.length > 0){
+            brand_model = brand_model[0];
+            let model = brand_model.models.filter(elem=>{
+              return elem.id === parseInt($this.val())
+            });
+            if(model.length > 0){
+              $('#inp-loan-amt').val(model[0].price + '');
+            }else{
+              $('#inp-loan-amt').val(1000000);
+            }
+            console.log(calculateLoan());
+          }
+        });
+      }else{
+        $('#model').html('').html(`
+          <label>Models</label>
+          <select id="select-model"></select>
+        `);
+      }
     });
 
-    if(brand_model.length > 0){
-      brand_model = brand_model[0];
-      let mHeader = `<select id="select-model">`;
-      let mOptions = [];
-      for(let i = 0; i < brand_model.models.length; i++){
-        let model = brand_model.models[i];
-        mOptions.push(`<option value="${model.id}">${model.name}</option>`);
-      }
-      let mFooter = `</select>`;
-  
-      $('#model').html('').html(`
-        <label>Models</label>
-        ${mHeader}${mOptions.join('')}${mFooter}
-      `);
-    }else{
-      $('#model').html('').html(`
-        <label>Models</label>
-        <select id="select-model"></select>
-      `);
-    }
-  });
-
-  $('#select-brand').trigger('change');
+    $('#select-brand').trigger('change');
+    $('#select-model').trigger('change');
+  }
 
   $('#inp-down-amt').on('change', function(){
     let amountVal = $('#inp-loan-amt').val();
@@ -96,9 +119,22 @@ $(document).ready(function(){
     }
     let percenVal = (downVal / amountVal) * 100;
     $('#inp-down-per').val(percenVal.toFixed(2));
+    console.log(calculateLoan());
+  });
+
+  $('#inp-terms-val').on('change',function(){
+    console.log(calculateLoan());
   });
 
   $('#btncalc').on('click',function(){
+    console.log(calculateLoan());
+  });
+
+  $('#btnsync').on('click',function(){
+    getBrands();
+  });
+
+  $('#inp-interest-amt').on('change',function(){
     console.log(calculateLoan());
   });
 
@@ -132,12 +168,17 @@ $(document).ready(function(){
       };
   }  
 
+  loadBrands();
   calculateLoan();
 
   function getBrands(){
+    $('#btnsync').attr('disabled', 'disabled');
     $.getJSON(`/auto/all`, (data)=>{
       storage.setObject('brands', data);
       hasLocal = data;
+      $('#btnsync').removeAttr('disabled');
+      loadBrands();
+      calculateLoan();
     });
   }
 });

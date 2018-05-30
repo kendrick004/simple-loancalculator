@@ -216,6 +216,10 @@ label {
   background-color: #45a049;
 }
 
+.btn:disabled {
+  background-color: gray;
+}
+
 a {
   color: #2196F3;
 }

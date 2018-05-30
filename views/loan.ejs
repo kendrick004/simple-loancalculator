@@ -31,15 +31,20 @@
                   <h3>House Listing</h3>
                 <% }else{ %>
                   <h3>Auto Loans</h3>
-                  <div id="brand" style="padding: 0px"></div>
-                  <div id="model" style="padding: 0px"></div>
+                  <div id="brand" style="padding: 0px">
+                    <select id="select-brand"></select>
+                  </div>
+                  <div id="model" style="padding: 0px">
+                      <select id="select-model"></select>
+                  </div>
+                  <input type="submit" value="Sync Brans and Models" class="btn" id="btnsync">
                 <% } %>
                 <label><i class="fa fa-user"></i> Loan Amount</label>
                 <input type="text" id="inp-loan-amt" placeholder="0" value="1000000">
                 <label><i class="fa fa-envelope"></i> Down Payment</label>
                 <div class="row">
                   <div class="col-25">
-                    <input type="text" id="inp-down-per" placeholder="0" value="20">
+                    <input type="text" id="inp-down-per" readonly placeholder="0" value="20">
                   </div>
                   <span style="padding-top: 10px;">OR</span>
                   <div class="col-50">
@@ -47,7 +52,6 @@
                   </div>
                 </div>
               </div>
-              
               <div class="col-50" style="margin-top: 62px;">
                 <label>Interest</label>
                 <input type="text" id="inp-interest-amt" placeholder="0" value="15">
