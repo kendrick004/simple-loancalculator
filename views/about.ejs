@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+  <navbar>
+    <ul>
+      <li><a href="/" class="active">Home</a></li>
+      <li class="dropdown">
+        <a href="javascript:void(0)" class="dropbtn">Loan Calculators</a>
+        <div class="dropdown-content">
+          <a href="/house">House Loan</a>
+          <a href="/auto">Auto Loan</a>
+        </div>
+      </li>
+    </ul>
+  </navbar>
+  <div class="content">
+    This is simple calculator
+  </div>
+</body>
+<script>
+  const page = '<%- page %>';
+</script>
+<script src="/static/js/bundle.js"></script>
+</html>
