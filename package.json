@@ -4,9 +4,7 @@
   "description": "Simple Loan Calculator",
   "private": true,
   "scripts": {
-    "start": "nodemon server.js",
-    "watch": "webpack --mode development --watch",
-    "build": "webpack --mode development"
+    "start": "node server.js & webpack"
   },
   "repository": {
     "type": "git",
@@ -28,8 +26,7 @@
     "express": "^4.16.3",
     "express-session": "^1.15.6",
     "jquery": "^3.3.1",
-    "request": "^2.87.0",
-    "vue": "^2.5.16"
+    "request": "^2.87.0"
   },
   "devDependencies": {
     "clean-webpack-plugin": "^0.1.19",
