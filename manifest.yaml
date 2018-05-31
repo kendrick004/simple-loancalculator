@@ -1,0 +1,9 @@
+applications:
+- path: .
+  random-route: true
+  memory: 256M
+  instances: 1
+  domain: au-syd.mybluemix.net
+  name: unistar
+  host: unistar
+  disk_quota: 1024M

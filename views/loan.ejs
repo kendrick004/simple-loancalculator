@@ -29,28 +29,47 @@
               <div class="col-50">
                 <% if(page == 'house') { %>
                   <h3>House Listing</h3>
+                  <label><i class="fa fa-user"></i> Loan Amount</label>
+                  <input type="text" id="inp-loan-amt" placeholder="0" value="1000000">
+                  <div class="row">
+                      <div class="col-25">
+                        <label><i class="fa fa-envelope"></i> Down Payment</label>
+                      </div>
+                      <div class="col-25">
+                        <input type="text" id="inp-down-per" placeholder="0" value="20">
+                      </div>
+                      <div style="display: none;">
+                        <span style="padding-top: 10px;">OR</span>
+                        <div class="col-50">
+                          <input type="text" id="inp-down-amt" readonly placeholder="0" value="200000">
+                        </div>
+                      </div>
+                    </div>
                 <% }else{ %>
                   <h3>Auto Loans</h3>
+                  <label><i class="fa fa-user"></i> Loan Amount</label>
+                  <input type="text" id="inp-loan-amt" placeholder="0" value="1000000">
+                  <div class="row">
+                      <div class="col-25">
+                        <label><i class="fa fa-envelope"></i> Down Payment</label>
+                      </div>
+                      <div class="col-25">
+                        <input type="text" id="inp-down-per" placeholder="0" value="20">
+                      </div>
+                      <div style="display: none;">
+                        <span style="padding-top: 10px;">OR</span>
+                        <div class="col-50">
+                          <input type="text" id="inp-down-amt" readonly placeholder="0" value="200000">
+                        </div>
+                      </div>
+                    </div>
                   <div id="brand" style="padding: 0px">
                     <select id="select-brand"></select>
                   </div>
                   <div id="model" style="padding: 0px">
                       <select id="select-model"></select>
                   </div>
-                  <input type="submit" value="Sync Brans and Models" class="btn" id="btnsync">
                 <% } %>
-                <label><i class="fa fa-user"></i> Loan Amount</label>
-                <input type="text" id="inp-loan-amt" placeholder="0" value="1000000">
-                <label><i class="fa fa-envelope"></i> Down Payment</label>
-                <div class="row">
-                  <div class="col-25">
-                    <input type="text" id="inp-down-per" readonly placeholder="0" value="20">
-                  </div>
-                  <span style="padding-top: 10px;">OR</span>
-                  <div class="col-50">
-                    <input type="text" id="inp-down-amt" placeholder="0" value="200000">
-                  </div>
-                </div>
               </div>
               <div class="col-50" style="margin-top: 62px;">
                 <label>Interest</label>
@@ -64,6 +83,13 @@
                   <option value="48">48 Months</option>
                   <option value="60">60 Months</option>
                 </select>
+                <% if(page == 'auto') { %>
+                  <br>
+                  <br>
+                  <br>
+                  <input type="submit" value="Sync Brands and Models" class="btn" id="btnsync">
+                  <input type="submit" value="Clear Data" class="btn" id="btnunsync">
+                <% } %>
               </div>
               
             </div>
@@ -73,7 +99,16 @@
       <div class="col-50">
         <div class="container">
             <h2>MONTHLY PAYMENT</h2>
-            <p id="monthly">P 0.00</p>
+            <p id="monthly" class="amount">P 0.00</p>
+
+            <h2>DOWN PAYMENT</h2>
+            <p id="downpay" class="amount">P 0.00</p>
+
+            <h2>Total Interest</h2>
+            <p id="totalint" class="amount">P 0.00</p>
+
+            <h2>Total Pay</h2>
+            <p id="totalpay" class="amount">P 0.00</p>
         </div>
       </div>
     </div>

@@ -11,7 +11,9 @@
 <body>
   <navbar>
     <ul>
-      <li><a href="/" class="active">Home</a></li>
+      <li>
+        <a href="/" class="active">Home</a>
+      </li>
       <li class="dropdown">
         <a href="javascript:void(0)" class="dropbtn">Loan Calculators</a>
         <div class="dropdown-content">
@@ -21,12 +23,46 @@
       </li>
     </ul>
   </navbar>
-  <div class="content">
-    This is simple calculator
-  </div>
+    <div class="row">
+      <div class="col-75">
+          <p>Digital computation system that allows a borrower to project how much the monthly payment will be on a loan and how long it will take to repay the borrowed amount. A loan calculator factors in the repayment of interest and principal on the loan to determine how long it will take to pay off. This is a good tool for potential borrower to use to see if they will be able to afford the monthly payment on the loan. To receive the most accurate number, a borrower would have to ask the lender for the interest rate that they qualify for.</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-50">
+          <div class="card">
+            <a href="/house">
+              <img src="https://d1ic4altzx8ueg.cloudfront.net/finder-au/wp-uploads/2014/04/home-calculater.jpg" alt="Avatar" style="width:100%">
+            </a>
+            <div class="container">
+              <a href="/house">
+              <h4>
+                <b>Home Loans Calculator</b>
+              </h4>
+              </a>
+              <p>Try our calculator for home loan eligibility</p>
+            </div>
+          </div>
+      </div>
+      <div class="col-50">
+          <div class="card">
+            <a href="/auto">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_3MuHlXW-pnDN25XAhv7GciVKENKpQhDVJsjBU0-zszkLBBqt" alt="Avatar" style="width:100%">
+            </a>
+            <div class="container">
+              <a href="/auto">
+              <h4>
+                <b>Auto Loans Calculator</b>
+              </h4>
+              </a>
+              <p>Calculate your payment on a motorcycle loan from Unistar.</p>
+            </div>
+          </div>
+      </div>
+    </div>
+    <script>
+      const page = '<%- page %>';
+    </script>
+    <script src="/static/js/bundle.js"></script>
 </body>
-<script>
-  const page = '<%- page %>';
-</script>
-<script src="/static/js/bundle.js"></script>
 </html>

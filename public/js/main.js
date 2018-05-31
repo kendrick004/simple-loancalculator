@@ -27,9 +27,7 @@ if(window.localStorage){
 }
 
 $(document).ready(function(){
-  if(storage.getItem('brands') === null){
-    getBrands();
-  }else{
+  if(storage.getItem('brands') !== null){
     hasLocal = storage.getObject('brands');
   }
 
@@ -134,10 +132,24 @@ $(document).ready(function(){
     getBrands();
   });
 
+  $('#inp-down-per').on('change',function(){
+    console.log(calculateLoan());
+  });
+
   $('#inp-interest-amt').on('change',function(){
     console.log(calculateLoan());
   });
 
+  $('#btnunsync').on('click',function(){
+    hasLocal = [];
+    storage.deleteObject('brands');
+    $('#inp-loan-amt').val('1000000');
+    $('#inp-interest-amt').val('15');
+    $('#inp-down-per').val('20');
+    $('#inp-down-amt').val('200000');
+    loadBrands();
+    calculateLoan();
+  });
   function calculateLoan() {
       let amountVal = $('#inp-loan-amt').val();
       let interestVal = $('#inp-interest-amt').val();
@@ -155,6 +167,9 @@ $(document).ready(function(){
       let globalTotalInterest = (total - amount).toFixed(2);
 
       $('#monthly').text(`P ${Helper.commaSeparateNumber(monthlyPayment)}`);
+      $('#downpay').text(`P ${Helper.commaSeparateNumber(downpayment.toFixed(2))}`);
+      $('#totalint').text(`P ${Helper.commaSeparateNumber(globalTotalInterest)}`);
+      $('#totalpay').text(`P ${Helper.commaSeparateNumber(total)}`);
 
       return {
         apr : apr,
